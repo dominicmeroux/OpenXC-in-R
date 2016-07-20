@@ -198,6 +198,12 @@ dbWriteTable(con, name="windshield_wiper_status",
 #dbGetQuery(con, "select count(*) from brake_pedal_status;")
 #dbListTables(con)
 
+################
+# Next step: Analyze data with R and SQL
+Test1 = 2*5
+
+################
+
 # Disconnect from Database
 dbDisconnect(con)
 dbUnloadDriver(drv)
