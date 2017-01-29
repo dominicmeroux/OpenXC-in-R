@@ -9,6 +9,13 @@
 # another tool, or imported into visualization software (e.g. Tableau).                        #
 ################################################################################################
 
+# If running the file from the command line, run
+# Rscript R-MySQL.R [TRUE|FALSE]
+# and uncomment the next two lines, and comment out the third 
+#CL_args = commandArgs(trailingOnly = TRUE)
+#FIRST_RUN = CL_args[1]
+FIRST_RUN = TRUE
+
 # Set working directory to access appropriate files.
 WD = # Insert working directory here
 setwd(WD)
@@ -108,91 +115,99 @@ windshield_wiper_status = OpenXC_data[which(OpenXC_data$name == "windshield_wipe
 ################################################################################################
 # CONNECTING RESULTS TO MySQL database
 
-# Write Tables (if doing this the first time, change overwrite to T and change append to F)
+# Write Tables (if doing this the first time, overwrite is T and append is F)
+if (FIRST_RUN==TRUE){
+  OVERWRITE_VAL = T
+  APPEND_VAL    = F
+} else{
+  OVERWRITE_VAL = F
+  APPEND_VAL    = T
+}
+
 dbWriteTable(con, name="accelerator_pedal_position", 
              value=accelerator_pedal_position,
              field.types=list(trace="varchar(21)", value="double", name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="brake_pedal_status", 
              value=brake_pedal_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="brake_pedal_status", 
              value=brake_pedal_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="engine_speed", 
              value=engine_speed, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="fuel_consumed_since_restart", 
              value=fuel_consumed_since_restart, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="fuel_level", 
              value=fuel_level, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="headlamp_status", 
              value=headlamp_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="high_beam_status", 
              value=high_beam_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="ignition_status", 
              value=ignition_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="coordinates", 
              value=coordinates, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="odometer", 
              value=odometer, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="parking_brake_status", 
              value=parking_brake_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="steering_wheel_angle", 
              value=steering_wheel_angle, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="torque_at_transmission", 
              value=torque_at_transmission, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="transmission_gear_position", 
              value=transmission_gear_position, 
              field.types=list(trace="varchar(21)", value="varchar(7)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="vehicle_speed", 
              value=vehicle_speed, 
              field.types=list(trace="varchar(21)", value="double",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 dbWriteTable(con, name="windshield_wiper_status", 
              value=windshield_wiper_status, 
              field.types=list(trace="varchar(21)", value="varchar(4)",  name="varchar(40)", timestamp="int(10)"),
-             row.names=F, overwrite=F, append=T)
+             row.names=F, overwrite=OVERWRITE_VAL, append=APPEND_VAL)
 
 # A couple of commands to confirm that the created tables exist: 
 #dbGetQuery(con, "select count(*) from brake_pedal_status;")
@@ -200,7 +215,6 @@ dbWriteTable(con, name="windshield_wiper_status",
 
 ################
 # Next step: Analyze data with R and SQL
-Test1 = 2*5
 
 ################
 
