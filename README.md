@@ -9,4 +9,5 @@ This R code was meant to allow use of R tools for further analysis.
 
 The aim for use with MySQL is to connect to your database, determine which drive trace files already have been read into the database, and read in only new files. Naturally, there are computational limits to this approach, so for larger amounts of data, an approach that uses parallel processing is ideal. To stay within R, one means of accomplishing this is with SparkR. 
 
-# COMING SOON: SparkR Approach
+# (IN PROGRESS) SparkR Approach
+This code was used on Databricks after uploading drive trace files. The code is currently a very rough draft - updates coming soon!
