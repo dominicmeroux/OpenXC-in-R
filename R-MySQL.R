@@ -9,24 +9,49 @@
 # another tool, or imported into visualization software (e.g. Tableau).                        #
 ################################################################################################
 
-# If running the file from the command line, run
-# Rscript R-MySQL.R [TRUE|FALSE]
-# and uncomment the next two lines, and comment out the third 
-#CL_args = commandArgs(trailingOnly = TRUE)
-#FIRST_RUN = CL_args[1]
-FIRST_RUN = TRUE
+# If running the file from the command line, run with the following arguments
+# Rscript R-MySQL.R "FIRST (OR NOT) TIME RUN" "WORKING_DIRECTORY" "DB_Name" "DB_User" "DB_Pass"
+#
+# e.g. Rscript R-MySQL.R "TRUE" "/Users/ME/Documents/VI_Traces" "MyDatabase" "ME" "abc123"
+#
+# Arguments
+###########
+#
+# R-MYSQL.R: run this R script, you must be in the directory containing it or specify the absolute path
+#
+# "FIRST (OR NOT) TIME RUN": set as "TRUE" if this is the first time running the file, else set as "FALSE"
+#
+# "WORKING_DIRECTORY": the working directory with your trace files, e.g. "/Users/dmeroux/Desktop"
+#                      on Mac or Linux; "C:\Users\dmeroux\Desktop" on Windows
+#
+# "DB_Name": MySQL Database name
+#
+# "DB_User": MySQL Username
+#
+# "DB_Pass": MySQL Password
+###########
+# This file is set up to run via command line - to change this, comment out "CL_args[x]" statements
+# and replace them with the appropriate values
+CL_args = commandArgs(trailingOnly = TRUE)
 
-# Set working directory to access appropriate files.
-WD = # Insert working directory here
+# Is this the first time you're running this file? 
+FIRST_RUN = CL_args[1]
+
+# Set working directory to access appropriate files
+WD = CL_args[2]
 setwd(WD)
 
 #########################################
 ######## STEP 1 - Extracting JSON Data
 #########################################
-#install.packages("jsonlite")
-#install.packages("sqldf")
-#install.packages("plyr")
-#install.packages("RMySQL")
+
+# Install required packages if they are not already installed
+Packages = c("jsonlite", "sqldf", "plyr", "RMySQL")
+sapply(Packages, function(x){if (any(grepl(x, installed.packages()))==FALSE){
+  install.packages(x, repos="http://cran.rstudio.com/")
+}})
+
+# Import libraries
 library("jsonlite")
 library("sqldf")
 library("plyr")
@@ -36,9 +61,9 @@ library("RMySQL")
 # ELSE IF DOING THIS FOR THE FIRST TIME, IGNORE EXISTINGTRACES-RELATED COMMANDS
 # http://www.stat.berkeley.edu/~nolan/stat133/Fall05/lectures/SQL-R.pdf
 # Goal here is to obtain names of existing traces in MySQL db so these aren't re-uploaded. 
-DB_Name = # Insert Database Name Here
-DB_User = # Insert Database Username Here
-DB_Pass = # Insert Database Password Here
+DB_Name = CL_args[3] # Insert Database Name Here
+DB_User = CL_args[4] # Insert Database Username Here
+DB_Pass = CL_args[5] # Insert Database Password Here
 drv = dbDriver("MySQL")
 con = dbConnect(drv, user=DB_User, dbname=DB_Name,
                 host="localhost", # Change "localhost" if host is different
