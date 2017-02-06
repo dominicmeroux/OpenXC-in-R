@@ -41,7 +41,7 @@ df_3FADP4BJ5DM119777_2 <- select(df_3FADP4BJ5DM119777_2, df_3FADP4BJ5DM119777_2$
 # concatenate all dataframes into one large dataframe
 DF <- unionAll(df_3FADP4BJ5DM119777_1, df_3FADP4BJ5DM119777_2)
 #count(df_3FADP4BJ5DM119777_1) # 7245978
-#count(df_3FADP4BJ5DM119777_2) # 456 ########## THIS CAN'T BE CORRECT...WHAT'S HAPPENING???
+#count(df_3FADP4BJ5DM119777_2) # 456 ########## TODO: fix issue with SD card files that causes only the first line of each to be read in
 #count(DF) # 7246434
 
 # COMMAND ----------
