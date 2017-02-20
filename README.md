@@ -31,4 +31,4 @@ MongoDB is a NoSQL database that can be useful for working with unstructured big
 The R-MongoDB program offers an approach to interfacing between MongoDB and R. Note, other programs (e.g. Python, etc.) may allow more options in interfacing with MongoDB, but as with the R-MySQL file, the R-MongoDB file offers a way to take advantage of R for analyzing data. 
 
 # SparkR Approach
-This code was used on Databricks after uploading drive trace files. The code is currently a very rough draft - updates coming soon!
+This code was used on Databricks after uploading drive trace files. The code is currently a rough draft and is meant to offer an R alternative to a PySpark approach (e.g. similar to the SMS Taxi dashboard and another program in development) - updates coming soon! 
